@@ -1,5 +1,4 @@
 import express from 'express';
-
 const app = express();
 const PORT = 3000;
 
@@ -24,4 +23,8 @@ app.get('/projects', (req, res) => {
   const filtered = projects.filter(p => p.tag === tag);
   const resu = filtered.map(p => p.name).join(' ');
   res.send(resu);
+});
+app.set("view engine", "ejs");
+app.get("/about", (req, res) => {
+  res.render("about", { title: "About" });
 });
