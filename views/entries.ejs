@@ -1,17 +1,38 @@
 <!doctype html>
-<%- include('partials/header') %>
 <html lang="en">
   <head>
-    <link rel="stylesheet" href="/style.css">
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
-    <h1><%= title %></h1>
-    <ul>
-      <% entries.forEach(entry => { %>
-        <li><%= entry.title %></li>
-      <% }); %>
-    </ul>
+    <%- include('partials/header') %>
+    <main>
+      <form id="entry-form">
+        <input type="text" name="title" placeholder="Title">
+        <input type="text" name="body" placeholder="Body">
+        <button type="submit">Add entry</button>
+      </form>
+
+      <ul id="entries">
+        <% entries.forEach((entry, index) => { %>
+          <li data-id="<%= index %>">
+            <span><strong><%= entry.title %>:</strong> <%= entry.body %></span>
+            <button class="delete-btn" type="button">Delete</button>
+          </li>
+        <% }); %>
+      </ul>
+
+      <section class="classic-form">
+        <h2>Classic form (no JavaScript)</h2>
+        <form method="POST" action="/entries/classic">
+          <input type="text" name="title" placeholder="Title">
+          <input type="text" name="body" placeholder="Body">
+          <button type="submit">Add entry the classic way</button>
+        </form>
+      </section>
+    </main>
+    <script src="/app.js" defer></script>
   </body>
 </html>
