@@ -2,7 +2,6 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
   </head>
@@ -14,11 +13,11 @@
         <input type="text" name="body" placeholder="Body">
         <button type="submit">Add entry</button>
       </form>
-
       <ul id="entries">
         <% entries.forEach((entry, index) => { %>
-          <li data-id="<%= index %>">
-            <span><strong><%= entry.title %>:</strong> <%= entry.body %></span>
+          <li data-id="<%= index %>" data-title="<%= entry.title %>" data-body="<%= entry.body %>">
+            <span class="entry-display"><strong><%= entry.title %>:</strong> <%= entry.body %></span>
+            <button class="edit-btn" type="button">Edit</button>
             <button class="delete-btn" type="button">Delete</button>
           </li>
         <% }); %>
