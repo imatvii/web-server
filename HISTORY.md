@@ -1,0 +1,4 @@
+- Total commits on main: 13
+- First commit hash: 87b2ec0
+- Latest commit hash: 1215f75
+- Summary of changes to views/about.ejs: added lines to b/views/about.ejs 
