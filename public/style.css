@@ -129,3 +129,9 @@ button:disabled {
   margin-bottom: 0.75rem;
   color: #334155;
 }
+
+.status {
+  min-height: 1.5em;
+  margin: 0 0 1rem;
+  color: #b00020;
+}

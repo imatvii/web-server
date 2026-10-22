@@ -2,25 +2,32 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title><%= title %></title>
     <link rel="stylesheet" href="/style.css">
+    <meta
+      name="htmx-config"
+      content='{
+        "timeout": 5000,
+        "responseHandling": [
+          { "code": "204", "swap": false },
+          { "code": "[23]..", "swap": true },
+          { "code": "[45]..", "swap": true, "error": true, "target": "#status", "swapOverride": "innerHTML" }
+        ]
+      }'
+    >
+    <script src="https://unpkg.com/htmx.org@2.0.4"></script>
   </head>
-  <body>
+  <body
+    hx-on::send-error="document.querySelector('#status').textContent = 'Could not reach the server.'"
+    hx-on::timeout="document.querySelector('#status').textContent = 'The server did not answer within five seconds.'"
+  >
     <%- include('partials/header') %>
     <main>
-      <form id="entry-form">
-        <input type="text" name="title" placeholder="Title">
-        <input type="text" name="body" placeholder="Body">
-        <button type="submit">Add entry</button>
-      </form>
-
+      <%- include('partials/entry-form') %>
+      <%- include('partials/status') %>
       <ul id="entries">
-        <% entries.forEach((entry, index) => { %>
-          <li data-id="<%= index %>">
-            <span><strong><%= entry.title %>:</strong> <%= entry.body %></span>
-            <button class="delete-btn" type="button">Delete</button>
-          </li>
+        <% entries.forEach((entry) => { %>
+          <%- include('partials/entry', { entry }) %>
         <% }); %>
       </ul>
 
@@ -33,6 +40,5 @@
         </form>
       </section>
     </main>
-    <script src="/app.js" defer></script>
   </body>
 </html>
