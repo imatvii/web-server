@@ -38,3 +38,4 @@ app.use((err, req, res, next) => {
 app.listen(PORT, () => {
   console.log(`Server running at http://localhost:${PORT}`);
 });// checkpoint 1
+// checkpoint 2
